@@ -1,0 +1,10 @@
+#+title: Mi repositorio de archivos dotfiles
+#+author: Andres Angarita
+
+* Instalación
+#+begin_src shell
+make clean
+make
+make install
+make sync
+#+end_src
