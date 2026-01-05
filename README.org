@@ -3,6 +3,8 @@
 
 * Instalación
 #+begin_src shell
+git clone git@github.com:angaritaoa/emacs.git
+cd emacs
 make clean
 make
 make install
