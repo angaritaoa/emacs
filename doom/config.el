@@ -148,3 +148,9 @@
 (setq-default tab-width 2)          ; Establece el ancho del tabulador visual a 2 espacios
 (setq-default indent-line-function #'indent-to-column) ; Usa espacios para la indentación
 (setq-default standard-indent 2)    ; Establece el incremento de indentación estándar a 2 espacios
+
+(use-package! corfu
+  :custom
+  (corfu-auto t)
+  (corfu--recompute)
+  (corfu-auto-delay 0.1))
