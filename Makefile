@@ -68,10 +68,10 @@ $(USER_PACKAGES) :
 
 install :
 	@if [ ! -d $(EMACS_DIR) ]; then
-		sudo pacman -S \
-			emacs-wayland git ripgrep fd shellcheck tidy \
+		sudo dnf install \
+			emacs-pgtk git ripgrep fd-find ShellCheck tidy \
 			sqlite libtool cmake gcc clang make nodejs \
-			npm glslang
+			nodejs-npm glslang
 		@git clone --depth 1 $(DOOM_REPO) $(EMACS_DIR)
 		@$(EMACS_DIR)/bin/doom install
 		@$(EMACS_DIR)/bin/doom doctor
