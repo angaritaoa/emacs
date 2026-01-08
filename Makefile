@@ -71,7 +71,7 @@ install :
 		sudo dnf install \
 			emacs-pgtk git ripgrep fd-find ShellCheck tidy \
 			sqlite libtool cmake gcc clang make nodejs \
-			nodejs-npm glslang
+			nodejs-npm glslang clang clang-tools-extra
 		@git clone --depth 1 $(DOOM_REPO) $(EMACS_DIR)
 		@$(EMACS_DIR)/bin/doom install
 		@$(EMACS_DIR)/bin/doom doctor

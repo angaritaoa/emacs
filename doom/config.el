@@ -7,7 +7,7 @@
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
 ;; clients, file templates and snippets. It is optional.
 (setq user-full-name "Andres Angarita"
-      user-mail-address "afao@icloud.com")
+      user-mail-address "angaritaoa@gmail.com")
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom:
 ;;
@@ -29,7 +29,7 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-(setq doom-font "JetBrainsMono Nerd Font:size=22")
+(setq doom-font "Adwaita Mono:size=19")
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -77,9 +77,13 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-;;(setq evil-normal-state-cursor '(hollow "#51afef")
-;;      evil-insert-state-cursor '(bar    "#51afef")
-;;      evil-visual-state-cursor '(hollow "#51afef"))
+(setq doom-themes-enable-bold t
+      doom-themes-enable-italic t)
+
+(setq-default indent-tabs-mode nil
+              tab-width 2
+              indent-line-function #'indent-to-column
+              standard-indent 2)
 
 (map! :leader
       :desc "Toggle cursor here" :nv "i c" #'+multiple-cursors/evil-mc-toggle-cursor-here
@@ -87,22 +91,6 @@
        :desc "Jump line"   :n "l" #'avy-goto-line
        :desc "Jump word"   :n "c" #'evil-avy-goto-char-timer
        :desc "Jump window" :n "w" #'switch-window))
-
-;;(setq projectile-project-search-path '("/mnt/archivos/projects" "/mnt/archivos/projects/bam")
-;;      blink-cursor-blinks 0
-;;      doom-themes-enable-bold t
-;;      doom-themes-enable-italic t
-;;      doom-themes-treemacs-theme "doom-atom"
-;;      doom-themes-treemacs-enable-variable-pitch nil
-;;      treemacs-width 50
-;;      +zen-text-scale nil
-;;      +zen-mixed-pitch-modes nil)
-
-;;(setq-default x-stretch-cursor t)
-
-;;(remove-hook 'text-mode-hook #'vi-tilde-fringe-mode)
-;;(remove-hook 'prog-mode-hook #'vi-tilde-fringe-mode)
-;;(remove-hook 'conf-mode-hook #'vi-tilde-fringe-mode)
 
 (after! org
   (map! :map org-mode-map
@@ -129,28 +117,16 @@
                                           (?- . ?⦁))
         org-ellipsis " ... "))
 
-;;(add-to-list 'default-frame-alist '(width  . 170))
-;;(add-to-list 'default-frame-alist '(height . 80))
-
-;;(setq centaur-tabs-style "bar"
-;;      centaur-tabs-set-bar -1
-;;      centaur-tabs-height 38
-;;      centaur-tabs-modified-marker "●")
-
 (after! magit
   (setq magit-diff-refine-hunk 'all))
 
-;;(setq lsp-dart-sdk-dir "~/.flutter/bin/cache/dart-sdk")
-;;(setq lsp-dart-flutter-sdk "~/.flutter")
-;;(setq flutter-sdk-path "~/.flutter")
-
-(setq-default indent-tabs-mode nil) ; Asegura que se usen espacios en lugar de tabuladores
-(setq-default tab-width 2)          ; Establece el ancho del tabulador visual a 2 espacios
-(setq-default indent-line-function #'indent-to-column) ; Usa espacios para la indentación
-(setq-default standard-indent 2)    ; Establece el incremento de indentación estándar a 2 espacios
-
-(use-package! corfu
-  :custom
-  (corfu-auto t)
-  (corfu--recompute)
-  (corfu-auto-delay 0.1))
+(after! corfu
+  (setq corfu-auto t
+        corfu-auto-delay 0.2
+        corfu-auto-prefix 2
+        corfu-cycle t
+        corfu-preselect ':prompt
+        tab-always-indent 'complete)
+  (map! :map corfu-map
+        "RET" #'corfu-insert
+        [return] #'corfu-insert))

@@ -22,11 +22,12 @@
 
        :completion
        ;;company           ; the ultimate code completion backend
-       (corfu +orderless +icons)  ; complete with cap(f), cape and a flying feather!
+       (corfu +orderless
+              +icons)      ; complete with cap(f), cape and a flying feather!
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;ivy               ; a search engine for love and life
-       vertico             ; the search engine of the future
+       (vertico +icons)    ; the search engine of the future
 
        :ui
        ;;deft              ; notational velocity for Emacs
@@ -49,7 +50,8 @@
        unicode             ; extended unicode support for various languages
        (vc-gutter +pretty) ; vcs diff in the fringe
        ;;vi-tilde-fringe   ; fringe tildes to mark beyond EOB
-       (window-select +switch-window)       ; visually switch windows
+       (window-select
+        +switch-window)    ; visually switch windows
        workspaces          ; tab emulation, persistence & separate workspaces
        ;;zen               ; distraction-free coding or writing
 
@@ -58,21 +60,23 @@
        file-templates      ; auto-snippets for empty files
        fold                ; (nigh) universal code folding
        ;;(format +onsave)  ; automated prettiness
+       format              ; automated prettiness
        ;;god               ; run Emacs commands without modifier keys
        ;;lispy             ; vim for lisp, for people who don't like vim
-       multiple-cursors  ; editing in many places at once
+       multiple-cursors    ; editing in many places at once
        ;;objed             ; text object editing for the innocent
        ;;parinfer          ; turn lisp into python, sort of
        ;;rotate-text       ; cycle region at point between text candidates
        snippets            ; my elves. They type so I don't have to
-       (whitespace +guess +trim)  ; a butler for your whitespace
+       (whitespace
+        +guess +trim)      ; a butler for your whitespace
        ;;word-wrap         ; soft wrapping with language-aware indent
 
        :emacs
        dired               ; making dired pretty [functional]
        electric            ; smarter, keyword-based electric-indent
        ;;eww               ; the internet is gross
-       ;;ibuffer           ; interactive buffer management
+       (ibuffer +icons)    ; interactive buffer management
        tramp               ; remote files at your arthritic fingertips
        undo                ; persistent, smarter undo for your inevitable mistakes
        vc                  ; version-control and Emacs, sitting in a tree
@@ -100,7 +104,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        lookup              ; navigate your code and its documentation
        ;;llm               ; when I said you needed friends, I didn't mean...
-       ;;(lsp +eglot)      ; M-x vscode
+       (lsp +eglot)        ; M-x vscode
        magit               ; a git porcelain for Emacs
        make                ; run make tasks from Emacs
        ;;pass              ; password manager for nerds
@@ -118,7 +122,8 @@
        ;;ada               ; In strong typing we (blindly) trust
        ;;agda              ; types of types of types of types...
        ;;beancount         ; mind the GAAP
-       ;;(cc +lsp)         ; C > C++ == 1
+       (cc +lsp
+           +tree-sitter)   ; C > C++ == 1
        ;;clojure           ; java with a lisp
        ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
@@ -129,7 +134,8 @@
        ;;dhall
        ;;elixir            ; erlang done right
        ;;elm               ; care for a cup of TEA?
-       emacs-lisp          ; drown in parentheses
+       (emacs-lisp
+        +tree-sitter)      ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;factor
@@ -153,7 +159,8 @@
        ;;lean              ; for folks with too much to prove
        ;;ledger            ; be audit you can be
        ;;lua               ; one-based indices? one-based indices
-       (markdown +tree-sitter)            ; writing docs for people to ignore
+       (markdown
+        +tree-sitter)      ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
@@ -169,10 +176,11 @@
        ;;rest              ; Emacs as a REST client
        ;;rst               ; ReST in peace
        ;;(ruby +rails)     ; 1.step {|i| p "Ruby is #{i.even? ? 'love' : 'life'}"}
-       ;;(rust +lsp)       ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
+       (rust +lsp
+             +tree-sitter) ; Fe2O3.unwrap().unwrap().unwrap().unwrap()
        ;;scala             ; java, but good
        ;;(scheme +guile)   ; a fully conniving family of lisps
-       sh                  ; she sells {ba,z,fi}sh shells on the C xor
+       (sh +lsp)           ; she sells {ba,z,fi}sh shells on the C xor
        ;;sml
        ;;solidity          ; do you need a blockchain? No.
        ;;swift             ; who asked for emoji variables?
