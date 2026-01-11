@@ -35,7 +35,7 @@ SYS_PACKAGES        = ~/.config/doom/packages.el
 # Emacs                                                                                                  #
 # ########################################################################################################
 .ONESHELL :
-.PHONY : doom config init packages install sync clean
+.PHONY : doom config init packages install sync clean rust
 
 doom : config init packages
 
@@ -86,3 +86,5 @@ clean :
 	@$(RM) $(EMACS_DIR) $(DOOM_DIR)
 	@$(OK) "Clean"
 
+rust :
+# ???

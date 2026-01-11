@@ -77,8 +77,9 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(setq doom-themes-enable-bold t
-      doom-themes-enable-italic t)
+(after! doom-theme
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t))
 
 (setq-default indent-tabs-mode nil
               tab-width 2
