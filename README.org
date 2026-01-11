@@ -10,13 +10,3 @@ make
 make install
 make sync
 #+end_src
-
-** Rust
-*** Install
-#+begin_src shell
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#+end_src
-*** Update
-#+begin_src shell
-rustup update
-#+end_src
