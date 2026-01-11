@@ -87,4 +87,4 @@ clean :
 	@$(OK) "Clean"
 
 rust :
-	@sudo dnf install rust cargo clippy rust-src rustfmt
+	@sudo dnf install rust cargo clippy rust-src rustfmt rust-analyzer
