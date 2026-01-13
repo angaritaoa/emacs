@@ -81,6 +81,9 @@
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
+(after! treesit
+  (setq treesit-font-lock-level 4))
+
 (setq-default indent-tabs-mode nil
               tab-width 2
               indent-line-function #'indent-to-column

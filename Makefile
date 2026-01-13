@@ -72,6 +72,8 @@ install :
 			emacs-pgtk git ripgrep fd-find ShellCheck tidy \
 			sqlite libtool cmake gcc clang make nodejs \
 			nodejs-npm glslang clang clang-tools-extra
+		@systemctl --user enable --now emacs.service
+		@cp -f emacs.desktop ~/.local/share/applications
 		@git clone --depth 1 $(DOOM_REPO) $(EMACS_DIR)
 		@$(EMACS_DIR)/bin/doom install
 		@$(EMACS_DIR)/bin/doom doctor
