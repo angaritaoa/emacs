@@ -29,7 +29,10 @@
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
 
-(setq doom-font "Adwaita Mono:size=19")
+(setq doom-font "JetBrains Mono:pixelsize=20:foundry=JB:weight=light:slant=normal:width=normal:spacing=100")
+
+(setq doom-themes-enable-bold nil
+      doom-themes-enable-italic t)
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -77,12 +80,10 @@
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
 
-(after! doom-theme
-  (setq doom-themes-enable-bold t
-        doom-themes-enable-italic t))
-
 (after! treesit
   (setq treesit-font-lock-level 4))
+
+(setq-default dirvish-reuse-session nil)
 
 (setq-default indent-tabs-mode nil
               tab-width 2
