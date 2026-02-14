@@ -19,45 +19,74 @@ ECHO                = echo -e
 OK                  = $(ECHO) "  [$(GREEN)OK$(RESET)]"
 
 # ########################################################################################################
-# Files                                                                                                   #
+# Doom                                                                                                   #
 # ########################################################################################################
+DOOM_REPO           = https://github.com/doomemacs/doomemacs
 EMACS_DIR           = ~/.config/emacs
-USER_INIT_CONF      = init.el
-SYS_INIT_CONF       = ~/.config/emacs/init.el
-USER_EARLY_CONF     = early-init.el
-SYS_EARLY_CONF      = ~/.config/emacs/early-init.el
+DOOM_DIR            = ~/.config/doom
+USER_CONFIG         = doom/config.el
+SYS_CONFIG          = ~/.config/doom/config.el
+USER_INIT           = doom/init.el
+SYS_INIT            = ~/.config/doom/init.el
+USER_PACKAGES       = doom/packages.el
+SYS_PACKAGES        = ~/.config/doom/packages.el
 
 # ########################################################################################################
 # Emacs                                                                                                  #
 # ########################################################################################################
 .ONESHELL :
-.PHONY : init early install
+.PHONY : doom config init packages install sync clean rust
 
-emacs : init early install
+doom : config init packages
 
-init : $(SYS_INIT_CONF)
+config : $(SYS_CONFIG)
 
-$(SYS_INIT_CONF) : $(USER_INIT_CONF)
-	@$(MK) $(EMACS_DIR)
-	@$(CP) $(USER_INIT_CONF) $(SYS_INIT_CONF)
+$(SYS_CONFIG) : $(USER_CONFIG)
+	@$(MK) $(DOOM_DIR)
+	@$(CP) $(USER_CONFIG) $(SYS_CONFIG)
+	@$(OK) "Config"
+
+$(USER_CONFIG) :
+
+init : $(SYS_INIT)
+
+$(SYS_INIT) : $(USER_INIT)
+	@$(MK) $(DOOM_DIR)
+	@$(CP) $(USER_INIT) $(SYS_INIT)
 	@$(OK) "Init"
 
-$(USER_INIT_CONF) :
+$(USER_INIT) :
 
-early : $(SYS_EARLY_CONF)
+packages : $(SYS_PACKAGES)
 
-$(SYS_EARLY_CONF) : $(USER_EARLY_CONF)
-	@$(MK) $(EMACS_DIR)
-	@$(CP) $(USER_EARLY_CONF) $(SYS_EARLY_CONF)
+$(SYS_PACKAGES) : $(USER_PACKAGES)
+	@$(MK) $(DOOM_DIR)
+	@$(CP) $(USER_PACKAGES) $(SYS_PACKAGES)
 	@$(OK) "Packages"
 
-$(USER_EARLY_CONF) :
+$(USER_PACKAGES) :
 
 install :
-	sudo dnf install \
-		emacs-pgtk git ripgrep fd-find ShellCheck tidy \
-		sqlite libtool cmake gcc clang make nodejs \
-		nodejs-npm glslang clang clang-tools-extra
-	@systemctl --user enable --now emacs.service
-	@cp -f emacs.desktop ~/.local/share/applications
+	@if [ ! -d $(EMACS_DIR) ]; then
+		sudo dnf install \
+			emacs-pgtk git ripgrep fd-find ShellCheck tidy \
+			sqlite libtool cmake gcc clang make nodejs \
+			nodejs-npm glslang clang clang-tools-extra
+		@systemctl --user enable --now emacs.service
+		@cp -f emacs.desktop ~/.local/share/applications
+		@git clone --depth 1 $(DOOM_REPO) $(EMACS_DIR)
+		@$(EMACS_DIR)/bin/doom install
+		@$(EMACS_DIR)/bin/doom doctor
+	fi
 	@$(OK) "Install"
+
+sync :
+	@$(EMACS_DIR)/bin/doom sync
+	@$(OK) "Sync"
+
+clean :
+	@$(RM) $(EMACS_DIR) $(DOOM_DIR)
+	@$(OK) "Clean"
+
+rust :
+	@sudo dnf install rust cargo clippy rust-src rustfmt rust-analyzer

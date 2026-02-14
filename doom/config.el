@@ -135,3 +135,6 @@
   (map! :map corfu-map
         "RET" #'corfu-insert
         [return] #'corfu-insert))
+
+(add-hook 'java-ts-mode-hook #'lsp)
+;;(add-hook 'java-ts-mode-hook 'eglot-ensure)
