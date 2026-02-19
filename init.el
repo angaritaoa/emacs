@@ -440,7 +440,7 @@
 (use-package eglot
   :config
   (setq eglot-report-progress nil)
-  (eglot-inlay-hints-mode nil))
+  (setq eglot-inlay-hints-mode nil))
 
 (use-package prog-mode
   :ensure nil
