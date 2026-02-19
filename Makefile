@@ -33,7 +33,7 @@ SYS_EARLY_CONF      = ~/.config/emacs/early-init.el
 .ONESHELL :
 .PHONY : init early install
 
-emacs : init early install
+emacs : init early
 
 init : $(SYS_INIT_CONF)
 
