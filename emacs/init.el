@@ -93,31 +93,51 @@
   :ensure t
   :after (consult hl-todo))
 
-(use-package corfu
-  :ensure t
-  :custom
-  (corfu-auto t)
-  (corfu-auto-delay 0.0)
-  (corfu-auto-prefix 1)
-  (corfu-cycle t)
-  (corfu-count 16)
-  (corfu-max-width 120)
-  (corfu-on-exact-match nil)
-  (corfu-preselect ':prompt)
-  (tab-always-indent 'complete)
-  :bind (:map corfu-map
-              ("RET" . #'corfu-insert)
-              ("<return>" . #'corfu-insert))
-  :init
-  (global-corfu-mode))
+;;(use-package corfu
+;;  :ensure t
+;;  :custom
+;;  (corfu-preview-current nil)
+;;  (corfu-on-exact-match nil)
+;;  (corfu-auto t)
+;;  (corfu-auto-delay 0.0)
+;;  (corfu-auto-prefix 1)
+;;  (corfu-cycle t)
+;;  (corfu-count 16)
+;;  (corfu-max-width 120)
+;;  (corfu-on-exact-match nil)
+;;  (corfu-preselect ':prompt)
+;;  (tab-always-indent 'complete)
+;;  :bind (:map corfu-map
+;;              ("RET" . #'corfu-insert)
+;;              ("<return>" . #'corfu-insert))
+;;  :init
+;;  (global-corfu-mode))
+;;
+;;(use-package cape
+;;  :ensure t
+;;  :init
+;;  (add-to-list 'completion-at-point-functions #'cape-file)
+;;  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
+;;  (add-to-list 'completion-at-point-functions #'cape-keyword)
+;;  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+(use-package company
+  :ensure t)
 
-(use-package cape
+(use-package lsp-mode
   :ensure t
-  :init
-  (add-to-list 'completion-at-point-functions #'cape-file)
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-keyword)
-  (add-to-list 'completion-at-point-functions #'cape-elisp-block))
+  :hook (java-mode . lsp-deferred)
+  :commands (lsp lsp-deferred)
+  :config
+  ;; Desactiva los Inlay Hints si te siguen molestando
+  (setq lsp-eldoc-render-all nil)
+  (setq lsp-signature-auto-activate nil)
+  ;; Esto suele arreglar el texto extraño que mencionabas
+  (setq lsp-completion-show-detail nil)
+  (setq lsp-completion-show-kind nil))
+
+(use-package lsp-java
+  :ensure t
+  :after lsp-mode)
 
 (use-package nerd-icons
   :ensure t
@@ -440,7 +460,11 @@
 (use-package eglot
   :config
   (setq eglot-report-progress nil)
-  (setq eglot-inlay-hints-mode nil))
+  (add-to-list 'eglot-ignored-server-capabilities :inlayHintProvider)
+  ;;(setq eglot-inlay-hints-mode nil)
+  ;;(setq-default eglot-inlay-hints-mode nil))
+  :hook
+  (eglot-managed-mode . (lambda () (eglot-inlay-hints-mode -1))))
 
 (use-package prog-mode
   :ensure nil
