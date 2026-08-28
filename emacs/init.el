@@ -156,7 +156,7 @@
 ;; #################################################################################################
 (use-package emacs
   :init
-  (add-to-list 'default-frame-alist '(font . "JetBrains Mono-9.5"))
+  (add-to-list 'default-frame-alist '(font . "Lilex-9.5"))
   (set-fontset-font t 'symbol "Symbols Nerd Font Mono" nil 'prepend))
 
 (use-package ligature

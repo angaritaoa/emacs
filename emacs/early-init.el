@@ -4,7 +4,7 @@
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars . nil) default-frame-alist)
-(push '(undecorated . t) default-frame-alist)
+;;(push '(undecorated . t) default-frame-alist)
 
 (setq inhibit-startup-message t)
 (setq frame-resize-pixelwise t)
